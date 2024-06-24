@@ -1,0 +1,1 @@
+<!-- Request method $_REQUEST is same as POST and GET but using POST and GET is more preferred now as it clearly tells developer's intention and makes code more readable. $_REQUEST was used in past and still could be found in legacy codebases but it's recommended to avoid it as much as possible -->
