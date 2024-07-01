@@ -18,9 +18,6 @@
 
   function loadView($name) {
    $viewPath = basePath("views/{$name}.view.php");
-   // Testing inspect and inspectAndDie
-   // inspect($viewPath); // Will show in top and continue whole page
-   // inspectAndDie($viewPath); // Will display just $viewPath on whole page
    if(file_exists($viewPath)) {
       require $viewPath;
    } else {
