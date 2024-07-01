@@ -17,12 +17,7 @@
   */
 
   function loadView($name) {
-   $viewPath = basePath("views/{$name}.view.php");
-   if(file_exists($viewPath)) {
-      require $viewPath;
-   } else {
-      echo "View {$name} not found";
-   }
+   require basePath("views/{$name}.view.php"); // will make it more concise to go with loadView('home') instead of require basePath('views/home.view.php');
   }
 
  /**
@@ -32,10 +27,5 @@
   */
 
   function loadPartial($name) {
-   $viewPath = basePath("views/partials/{$name}.php");
-   if(file_exists($viewPath)){
-      require "views/partials/{$name}.php";
-   } else {
-      echo "Partial $name not found";
-   }
+   require basePath("views/partials/{$name}.php"); // very similar to load view so instead of <?php require basePath('views/partials/top-banner.php')?->, can do loadPartial('top-banner')
   }

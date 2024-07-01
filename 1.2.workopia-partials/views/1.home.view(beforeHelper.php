@@ -1,7 +1,7 @@
-<?php loadPartial('head') ?>
-<?php loadPartial('navbar') ?>
-<?php loadPartial('showcase-search') ?>
-<?php loadPartial('top-banner') ?>
+<?php require basePath('views/partials/head.php') ?>
+<?php require basePath('views/partials/navbar.php') ?>
+<?php require basePath('views/partials/showcase-search.php') ?>
+<?php require basePath('views/partials/top-banner.php') ?>
     <!-- Job Listings -->
     <section>
       <div class="container mx-auto p-4 mt-4">
@@ -192,5 +192,5 @@
         </a>
       </section>
 
-<?php loadPartial('bottom-banner') ?>
-<?php loadPartial('footer') ?>
+      <?php require basePath('views/partials/bottom-banner.php')?>
+<?php require basePath('views/partials/footer.php') ?>
