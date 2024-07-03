@@ -52,6 +52,7 @@
   }
 
    /** 
+   * Inspect value(s) and die (will only print out that particular thing in place of whole page)
    * @params mixed $values
    * @return void
    */
