@@ -1,0 +1,1 @@
+<?= loadView('home.view') ?>
