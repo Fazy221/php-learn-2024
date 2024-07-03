@@ -1,1 +1,3 @@
-<?= loadView('home.view') ?>
+<?php 
+
+loadView('home');

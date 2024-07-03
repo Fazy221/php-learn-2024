@@ -1,1 +1,3 @@
-<?= loadView('listings/index') ?>
+<?php 
+
+loadView('listings/index');

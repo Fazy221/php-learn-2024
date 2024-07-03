@@ -1,65 +1,62 @@
 <?php 
 
 /**
- * Base path helper func for appending parent dir
+ * Get the base path
+ * 
  * @params string $path
  * @return string
  */
-
-function basePath($path) {
+ function basePath($path = '') {
     return __DIR__ . '/' . $path;
-}
-
-/** 
- * Load view helper func 
- * @params string $value
- * @return void
- */
-
-function loadView($value) {
-    $valuePath = basePath("views/$value.php");
-    if(file_exists($valuePath)) {
-        require $valuePath;
-    } else {
-        echo "No view $value found";
-    }
-}
-
-/** 
- * Load partial helper func 
- * @params string $value
- * @return void
- */
-
- function loadPartial($value) {
-    $valuePath = basePath("views/partials/$value.php");
-    if(file_exists($valuePath)) {
-        require $valuePath;
-    } else {
-        echo "No partial $partial found";
-    }
-}
-
-/**
- * Inspect for debug
- * @params mixed $values
- * @return void
- */
-
- function inspect($values) {
-    echo '<pre>';
-    var_dump($values);
-    echo '</pre>';
  }
 
  /**
- * InspectAndDie for debug and break script
- * @params mixed $values
- * @return void
- */
+  * Load view 
+  * @params string $name
+  * @return void
+  */
 
- function inspectAndDie($values) {
-    echo '<pre>';
-    die(var_dump($values));
-    echo '</pre>';
- }
+  function loadView($name) {
+   $viewPath = basePath("views/{$name}.view.php");
+   if(file_exists($viewPath)) {
+      require $viewPath;
+   } else {
+      echo "View {$name} not found";
+   }
+  }
+
+ /**
+  * Load partial 
+  * @params string $name
+  * @return void
+  */
+
+  function loadPartial($name) {
+   $viewPath = basePath("views/partials/{$name}.php");
+   if(file_exists($viewPath)){
+      require "views/partials/{$name}.php";
+   } else {
+      echo "Partial $name not found";
+   }
+  }
+
+  /** 
+   * Inspect value(s)
+   * @params mixed $values
+   * @return void
+   */
+  function inspect($value) {
+   echo '<pre>';
+   var_dump($value);
+   echo '</pre>';
+  }
+
+   /** 
+   * @params mixed $values
+   * @return void
+   */
+  function inspectAndDie($value) {
+   echo '<pre>';
+   die(var_dump($value));
+   echo '</pre>';
+  }

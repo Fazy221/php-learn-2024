@@ -1,1 +1,0 @@
-<?= loadView('errors/404') ?>
