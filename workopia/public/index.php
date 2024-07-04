@@ -1,11 +1,8 @@
 <?php 
 require('../helper.php');
 
-require basePath('Database.php');
-$config = require basePath('config/db.php');
-$db = new connectDB($config);
-
 require basePath('Router.php');
+require basePath('Database.php');
 
 
 $router = new Router(); 
