@@ -33,17 +33,30 @@ class Database
      * @throws PDOException
      */
 
-     public function query($query, $params = []) {
+     public function query($query) {
         try{
             $sth = $this->conn->prepare($query);
-
-            // Bind named params
-            foreach($params as $param => $value) {
-                $sth->bindValue(':' . $param, $value);
-            }
-
             $sth->execute();
             return $sth;
+        } catch(PDOException $e) {
+            throw new Exception("Error when quering db: {$e->getMessage()}");
+        }
+     }
+     
+     /**
+      * Query single based on id
+      * 
+      * @param int $id
+      * @return PDOStatement
+      * @throws PDOException
+      */
+      public function querySl($query, $id) {
+        try{
+            $stmt = $this->conn->prepare($query); 
+            $params = ['id'=>$id];
+            $stmt->execute($params);
+            $post = $stmt->fetch();
+            return $stmt;
         } catch(PDOException $e) {
             throw new Exception("Error when quering db: {$e->getMessage()}");
         }
