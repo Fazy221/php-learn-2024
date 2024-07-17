@@ -1,0 +1,2 @@
+## Making a custom autoloader in helper func so won't have to require class like Database.php or Router.php everytime where required. On insaniation, they'll be automatically loaded
+## Made Test.php in Framework folder to test if it loader is working. In Test.php, class is made with constructor which dies on insaniation after it echo out 'Test ran...'. Will insaniate this class in helper itself to quickly see if it's working. Will remove after this video over.
