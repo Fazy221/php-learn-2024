@@ -1,0 +1,2 @@
+## Added Framework folder and moved Database, Router file in it then modified public/index.php where we're requiring them by adding Framework/ to them
+## Added App folder and moved views, controller to it. If we'd have models in future then will move there as well. Then modifying route func in Framework/Router.php where we're requiring controller folder and concatenate 'App/' with it. Also add App/ in helper.php where we're loading view. 
