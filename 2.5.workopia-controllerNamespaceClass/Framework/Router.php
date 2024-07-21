@@ -5,6 +5,8 @@ class Router {
     protected $routes = []; 
 
     public function registerRoute($method, $uri, $action) { 
+        // $arr = explode('@', $action);
+        // inspectAnddie($arr);
         list($controller, $controllerMethod) = explode('@', $action);
         $this->routes[] = [
             'method' => $method,
@@ -66,6 +68,7 @@ class Router {
     public function route($uri, $method) {
         foreach($this->routes as $route) {
             if($route['uri'] === $uri && $route['method'] === $method){
+                // require basePath('App/' . $route['controller']);
                 $controller = 'App\\Controllers\\' . $route['controller'];
                 $controllerMethod = $route['controllerMethod'];
 
