@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 class ErrorController
 {
-    public function notFound($message='Resource not found!')
+    public static function notFound($message='Resource not found!')
     {
         http_response_code(404);
         loadView('error', [
@@ -12,7 +12,7 @@ class ErrorController
             'message' => $message
         ]);
     }
-    public function notAuthorized($message = 'You\'re not authorized' )
+    public static function notAuthorized($message = 'You\'re not authorized' )
     {
         http_response_code(403);
         loadView('error', [

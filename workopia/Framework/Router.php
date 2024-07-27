@@ -1,6 +1,8 @@
 <?php 
 namespace Framework;
 
+use App\Controllers\ErrorController;
+
 class Router {
     protected $routes = []; 
 
@@ -45,17 +47,6 @@ class Router {
         $this->registerRoute('DELETE', $uri, $controller);
     }
 
-    /**
-     * Load error page
-     * @param int $httpCode
-     * @return void
-     */
-    public function error(){ 
-        $errController = 'App\\Controllers\\ErrorController';
-        $errControllerInstance = new $errController();
-        $errControllerInstance->notFound('Route not found!');
-        exit;
-    }
 
     /**
      * Route the request
@@ -75,7 +66,7 @@ class Router {
                 return;
             }
         }
-        $this->error(); 
+        ErrorController::notFound();
     }
 }
 
