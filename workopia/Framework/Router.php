@@ -50,9 +50,10 @@ class Router {
      * @param int $httpCode
      * @return void
      */
-    public function error($httpCode = 404){ 
-        http_response_code($httpCode); 
-        loadView("error/$httpCode"); 
+    public function error(){ 
+        $errController = 'App\\Controllers\\ErrorController';
+        $errControllerInstance = new $errController();
+        $errControllerInstance->notFound('Route not found!');
         exit;
     }
 
