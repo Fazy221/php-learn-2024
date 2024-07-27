@@ -6,7 +6,7 @@ $id = $_GET['id'] ?? '';
 $params = [
     'id' => $id
 ];
-$listing = $db->query('SELECT * FROM listings WHERE id = :id ', $params)->fetch(); // As put :id, second arg is array in which it'll find key by same name as :id then extract it's value to put in place of :id
+$listing = $db->query('SELECT * FROM listings WHERE id = :id ', $params)->fetch(); 
 
 // inspect($listing); 
 loadView('listings/show', [

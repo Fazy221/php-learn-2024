@@ -1,8 +1,7 @@
 <?php
 require __DIR__ . '/../vendor/autoload.php';
 require('../helper.php');
-use Framework\Router; // Way 2 of using namespace (Recommended)
-// $router = new Framework\Router(); // Way 1 of using namespace
+use Framework\Router; 
 $router = new Router(); 
 
 $routes = require basePath('routes.php');
