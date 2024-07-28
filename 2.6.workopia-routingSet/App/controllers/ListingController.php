@@ -26,6 +26,7 @@ class ListingController
     }
     public function show($params)
     {
+        // $id = $_GET['id'] ?? ''; // prev way
         $id = $params['id'];
         $params = [
             'id' => $id

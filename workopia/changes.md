@@ -1,2 +1,0 @@
-## Building error controller with method notFound having default message 'resource not found' in case we don't pass any message then when loading view, passing assoc arr in it along http response code
-## In Router.php under Framework folder, removed errorView method and instead, when failed to match uri and method, it would utilize 'imported through namespace' static class ErrorController's method notFound using double scope opeartor. 

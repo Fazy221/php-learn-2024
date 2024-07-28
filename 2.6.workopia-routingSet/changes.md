@@ -1,0 +1,6 @@
+## Will have to do some adjusting when visiting a job detail page so instead of url looking like "http://workopia.test/listing?id=1", it will look like "http://workopia.test/listing/1". 
+## Following Laravel's convention, will add /{id} in routes.php where we're using ListingController@show 
+## Will take out $method from public/index.php because we'll later need it to update and delete listing so it'll be more useful there. Also will remove $method from route method of Framework\Router where we try matching requested method with defined one from routes arr. Then will do all configurations which properly explained there. 
+## Will modify show method in ListController to accept $params as argument and instead of having it take id through superglobal, it'll be from param's el id which'll be then passed to db
+## In ListController, if listing ain't found i.e., on url 'http://workopia.test/listing/20' then ErrorController static method will be used after importing it's namespace
+## Added go back to listing link in Error view
