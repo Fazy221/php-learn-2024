@@ -16,6 +16,10 @@ class ListingController
     }
     public function index()
     {
+        // inspectAndDie(Validation::string('')); // Testing with empty str which return false
+        // inspectAndDie(Validation::string('a', 2)); // Testing with str with min or max defined. This one return false with min being 2
+        // inspectAndDie(Validation::email('  abc@gmail.com')); // Testing email method
+        // inspectAndDie(Validation::match('faizan', 'fAiZaN')); // Testing email method
         $listings = $this->db->query('SELECT * FROM listings')->fetchAll();
         loadView('listings/index', [
             'listings' => $listings
@@ -39,11 +43,5 @@ class ListingController
         loadView('listings/show', [
             'listing' => $listing
         ]);
-    }
-    public function store() {
-        $allowedFields = ['title', 'description', 'salary', 'tags', 'company', 'address', 'city', 'state', 'phone', 'email', 'requirements', 'benefits'];
-        $newListingData = array_intersect_key($_POST, array_flip($allowedFields));
-        $newListingData['user_id'] = 1; 
-        $newListingData = array_map('sanitize', $newListingData); 
     }
 }

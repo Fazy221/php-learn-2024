@@ -41,9 +41,13 @@ class ListingController
         ]);
     }
     public function store() {
+        // inspectAndDie($_POST); // testing if echos out submitted form info
         $allowedFields = ['title', 'description', 'salary', 'tags', 'company', 'address', 'city', 'state', 'phone', 'email', 'requirements', 'benefits'];
+        // $newListingData will be sanitized one came from form. array_intersect_key will check if keys of both arrays match. 
+        // As $allowedFields is simple arr instead of assoc so it don't have values therefore we'll use array_flip which turns simple arr to assoc like ['title'] = ['title'=>0]
         $newListingData = array_intersect_key($_POST, array_flip($allowedFields));
-        $newListingData['user_id'] = 1; 
-        $newListingData = array_map('sanitize', $newListingData); 
+        // inspectAndDie($newListingData); // if keys matches then it'll return first param arr which is $_POST in this case. Values which don't match like ['title'] not being in $allowedFields will exclude it from $_POST arr
+        $newListingData['user_id'] = 1; // since we don't have authentication/session setup so we'll temporary assign listing to user_id 1. 
+        $newListingData = array_map('sanitize', $newListingData); // after adding sanitize method in helper.php, will apply on each value of $_POST so dirty content like html don't directly get parsed
     }
 }
