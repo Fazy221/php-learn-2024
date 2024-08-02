@@ -64,8 +64,9 @@ class Router
     public function route($uri)
     {
         $requestMethod = $_SERVER['REQUEST_METHOD'];
-        if($requestMethod === 'POST' && isset($_POST['_method'])) { 
-            $requestMethod = strtoupper($_POST['_method']);
+        if($requestMethod === 'POST' && isset($_POST['_method'])) { // Check if input containing method exists 
+            // Override request method with value of _method which could be DELETE or PUT
+            $requestMethod = strtoupper($_POST['_method']); // Will change requestMethod from POST to DELETE 
         } 
         foreach ($this->routes as $route) {
             $uriSegments = explode('/', trim($uri, '/')); 

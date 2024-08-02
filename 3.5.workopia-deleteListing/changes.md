@@ -1,0 +1,7 @@
+## Will first change 'listing' inside "$router->get('/listing/{id}', 'ListingController@show');" to 'listings' to stay consistent. For it, will go to home.view and add 's' in '<a href="/listings/<?= $listing->id ?' but it's already here for me for some reason not for instructor. Then will do same in listings/index.view.php 
+
+## Will now setup delete request by first defining inside routes which controller and method to use in routes.php "$router->delete('/listings/{id}', 'ListingController@destroy'); "
+## Will then go to listing/show.view.php which is detail page of job and under delete form, we can either send GET or POST req so will keep POST. Then we'll add hidden input of delete method. We won't use id this time because we can take from defined params now. 
+## Now we'll modify route method a bit in Router.php. We'll add a if/else statement which will check if requestMethod is post and contains '_method' and if it does then change request method from post to delete
+## Will add destroy method in ListingController which takes in param arr as argument, take out id from it and store in variable then put in params arr in order to put inside query. If single listing not found after query is fetched then use ErrorController to go in that view with custom message in case listing not found. If found then use inspectAndDie for the time being to test
+## As listing is found then will run delete query and redirect to listing page 

@@ -78,17 +78,18 @@ class ListingController
             redirect('/listings');
         }
     }
-    public function destroy($params) { 
-        $id = $params['id']; 
+    public function destroy($params) { // will get params arr as argument
+        $id = $params['id']; // will define it as variable/value
         $params = [
-            'id' => $id
+            'id' => $id // will put in an isolated array again as assoc arr
         ];
-        $listing = $this->db->query('SELECT * FROM listings WHERE id = :id', $params)->fetch(); 
-        if(!$listing) { 
+        $listing = $this->db->query('SELECT * FROM listings WHERE id = :id', $params)->fetch(); // since it's single id so will simply use fetch()
+        if(!$listing) { // if listing not found then use error controller
           ErrorController::notFound('Listing not found!');
           return;
         };
-        $this->db->query('DELETE FROM listings WHERE id = :id', $params)->fetch(); 
+        // inspectAndDie($listing);
+        $this->db->query('DELETE FROM listings WHERE id = :id', $params)->fetch(); // deleting listing
         redirect('/listings');
     }
 }
