@@ -1,0 +1,3 @@
+## In edit.view.php, will change form action from "/listings" to "/listings/{id}" since we're supposed to go to detail page after clicking save btn. Will then add hidden input similar to delete. 
+## Then go and create update method in ListingController.php. Don't know why instructor didn't mention about adding PUT method in Framework\Router.php but I added and it worked. All details are in it
+## Adding flash message to listings/show.view.php of listing being updated successfully

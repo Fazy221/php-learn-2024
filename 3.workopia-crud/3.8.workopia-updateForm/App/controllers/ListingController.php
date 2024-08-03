@@ -110,6 +110,7 @@ class ListingController
     }
     public function update($params)
     {
+        // Taking params which contain id and fetching listing from it (since dry code as used in other methods too so will make seperately to use in future)
         $id = $params['id'];
         $params = [
             'id' => $id
@@ -119,17 +120,23 @@ class ListingController
             ErrorController::notFound('Listing ain\'t found');
             return;
         }
+        // Will compare keys from allowedFields to $_POST which contain updated fields to verify if keys of both are same. If true then return $_POST 
         $allowedFields = ['title', 'description', 'salary', 'tags', 'company', 'address', 'city', 'state', 'phone', 'email', 'requirements', 'benefits'];
         $updatedValues = [];
         $updatedValues = array_intersect_key($_POST, array_flip($allowedFields));
         $updatedValues = array_map('sanitize', $updatedValues); // will use sanitize from helper func to sanitize each value of $updatedValues
+        // inspectAndDie($updatedValues); // verifying if works
         $requiredFields = ['title', 'description', 'email', 'city', 'state', 'salary'];
         $errors = [];
         foreach($requiredFields as $field) {
+            // Now will run loop to check if specifically the values being to keys from requiredFields are not empty. If they're then put in err arr and load view with them
             if (empty($updatedValues[$field]) || !Validation::string($updatedValues[$field])) {
                 $errors[$field] = ucfirst($field) . ' is required!';
             }
         }
+        // inspectAndDie($errors); // verifying if works
+
+        // If errors arr have data which mean some fields values are empty or not valid then will send data along errors in the view
         if(!empty($errors)) {
             loadView('listings/edit', [
                 'listing' => $listing,
@@ -137,11 +144,17 @@ class ListingController
             ]);
             exit;
         } else {
+            // Submit to db 
+            // inspectAndDie('success'); // verifying if works
             $updateFields = [];
+            // Will first get keys of updated values
             foreach(array_keys($updatedValues) as $field) {
-                $updateFields[] = "{$field} = :{$field}"; 
+                // inspect($field); // testing if work. Will get result like: string(5) "title" string(11) "description" string(6) "salary"
+                $updateFields[] = "{$field} = :{$field}"; // As we'll add this in updateFields arr, it'll be helpful in query when doing: UPDATE listings SET title = :title WHERE id = 1
+                // The updateFields will now look like this arr: "array(12) {[0]=>string(14) "title = :title"[1]=>string(26) "description = :description" 
             }
-            $updateFields = implode(', ', $updateFields); 
+            // inspectAndDie($updateFields); // testing if work. 
+            $updateFields = implode(', ', $updateFields); // Will make it look like: title = :title, description: :description
             $updateQuery = "UPDATE listings SET $updateFields WHERE id = :id";
             $updatedValues['id'] = $id;
             $this->db->query($updateQuery, $updatedValues);
