@@ -89,6 +89,7 @@ class ListingController
           return;
         };
         $this->db->query('DELETE FROM listings WHERE id = :id', $params)->fetch(); 
+        // Setting flash messages before redirect
         $_SESSION['success_message'] = 'Listing deleted successfully';
         redirect('/listings');
     }
