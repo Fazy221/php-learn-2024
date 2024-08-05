@@ -61,6 +61,7 @@ class UserController
             exit;
         } 
         
+        // Check if email exists in DB
         $params = [
             'email' => $email,
         ];
@@ -73,6 +74,7 @@ class UserController
             exit;
         }
 
+        // Create user acc (will use password_hash which is very similar in js to hashSync(password, 6))
         $params = [
             'name' => $name,
             'email' => $email,
