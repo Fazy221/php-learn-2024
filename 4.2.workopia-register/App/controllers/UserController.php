@@ -27,6 +27,8 @@ class UserController
 
     public function store()
     {
+        // inspectAndDie('store'); // verifying if clicking register btn working as expected
+        // Will now save each value in individual variable
         $name = $_POST['name'];
         $email = $_POST['email'];
         $city = $_POST['city'];
@@ -36,6 +38,7 @@ class UserController
 
         $errors = [];
 
+        // Now will validate
         if (!Validation::email($email)) {
             $errors['email'] = 'Please enter a valid email address!';
         };
@@ -48,6 +51,7 @@ class UserController
         if(!Validation::match($password, $passwordConfirmation)) {
             $errors['confirm_password'] = 'Passwords do not matched';
         }
+        // If errors arr contain errors then will reload view with fields data which won't incl password for ofc reasons
         if (!empty($errors)) {
             loadView('users/create', [
                 'errors' => $errors,
