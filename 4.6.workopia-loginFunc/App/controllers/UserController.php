@@ -104,6 +104,7 @@ class UserController
         $email = $_POST['email'];
         $password = $_POST['password'];
         $errors = [];
+        // Validation
         if (!Validation::email($email)) {
             $errors['email'] = 'Please enter a valid email address!';
         };
@@ -116,6 +117,7 @@ class UserController
             ]);
         }
         exit;
+        // Checking if email already exists
         $params = [
             'email' => $email,
         ];
@@ -127,6 +129,7 @@ class UserController
             ]);
             exit;
         }
+        // Verifying password
         if (!password_verify($password, $user->password)) {
             $errors['email'] = 'Incorrect credentials!';
             loadView('users/login', [
@@ -134,6 +137,7 @@ class UserController
             ]);
             exit;
         }
+        // Set user session
         Session::set('user', [
             'id' => $user->userId,
             'name' => $user->name,
