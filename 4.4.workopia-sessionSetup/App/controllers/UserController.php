@@ -82,7 +82,9 @@ class UserController
             'password' => password_hash($password, PASSWORD_DEFAULT) 
         ];
         $this->db->query('INSERT INTO users (name, email, city, state, password) VALUES (:name, :email, :city, :state, :password)', $params);
+        // Get new user id using conn to fetch last inserted userId
         $userId = $this->db->conn->lastInsertId();
+        // Will save now to session along all info
         Session::set('user', [
             'id' => $userId, 
             'name' => $name,
@@ -90,6 +92,7 @@ class UserController
             'city' => $city,
             'state' => $state
         ]);
+        // inspectAndDie(Session::get('user')); // verifying if info is stored
         redirect('/');
     }
 }

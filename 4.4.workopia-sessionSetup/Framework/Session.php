@@ -2,6 +2,8 @@
 
 namespace Framework;
 
+// These will be static methods as we won't be insaniating anything
+// Session are of three types: 0 (Session Disabled) 1 (No Session) 2 (Active Session)
 class Session {
 
     /**
@@ -11,7 +13,7 @@ class Session {
      */
     public static function start() {
         if(session_status() == PHP_SESSION_NONE) {
-            session_start();
+            session_start(); // If there is no session (1) then it'll start session
         }
     }
 
