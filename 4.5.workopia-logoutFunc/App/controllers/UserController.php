@@ -94,9 +94,9 @@ class UserController
     }
     public function logout() 
     {
-        Session::clearAll(); 
-        $params = session_get_cookie_params(); 
-        setCookie('PHPSESSID', '', time() - 86400, $params['path'], $params['domain']); 
+        Session::clearAll(); // destroying session
+        $params = session_get_cookie_params(); // get path of cookie
+        setCookie('PHPSESSID', '', time() - 86400, $params['path'], $params['domain']); // As checked from inspect el, cookie name is PHPSESSID so will replace it's value with empty str then expiration and so on
         redirect('/');
     }
 }
