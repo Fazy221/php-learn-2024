@@ -99,7 +99,7 @@ class UserController
         setCookie('PHPSESSID', '', time() - 86400, $params['path'], $params['domain']);
         redirect('/');
     }
-    public function authenticate()
+    public function authentication()
     {
         $email = $_POST['email'];
         $password = $_POST['password'];
@@ -110,12 +110,12 @@ class UserController
         if (!Validation::string($password, 6, 50)) {
             $errors['password'] = 'Password must be atleast 6 characters';
         }
-        if (!empty($errors)) {
+        if(!empty($errors)) {
             loadView('users/login', [
                 'errors' => $errors,
             ]);
-            exit;
         }
+        exit;
         $params = [
             'email' => $email,
         ];
@@ -135,7 +135,7 @@ class UserController
             exit;
         }
         Session::set('user', [
-            'id' => $user->id,
+            'id' => $user->userId,
             'name' => $user->name,
             'email' => $user->email,
             'city' => $user->city,

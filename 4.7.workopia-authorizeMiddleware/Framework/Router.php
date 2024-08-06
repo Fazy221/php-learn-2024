@@ -9,7 +9,7 @@ class Router
 {
     protected $routes = [];
 
-    public function registerRoute($method, $uri, $action, $middleware = []) 
+    public function registerRoute($method, $uri, $action, $middleware = []) // adding middleware as arg to defined register routes
     {
         list($controller, $controllerMethod) = explode('@', $action);
         $this->routes[] = [
@@ -29,9 +29,9 @@ class Router
      * @param string $middleware 
      * return void 
      */
-    public function get($uri, $controller, $middleware = []) 
+    public function get($uri, $controller, $middleware = []) // adding middleware as 3rd arg with default as empty arr 
     {
-        $this->registerRoute('GET', $uri, $controller, $middleware); 
+        $this->registerRoute('GET', $uri, $controller, $middleware); // passing to registerRoute
     }
     /**
      * Add POST Method
@@ -105,8 +105,8 @@ class Router
                     }
                 }
                 if ($match) {
-                    foreach($route['middleware'] as $middleware) { 
-                        (new Authorize())->handle($middleware); 
+                    foreach($route['middleware'] as $middleware) { // looping through middleware arr from diff roles
+                        (new Authorize())->handle($middleware); // will insaniate authorize class to pass in middleware to handle method
                     } 
                     $controller = 'App\\Controllers\\' . $route['controller']; 
                     $controllerMethod = $route['controllerMethod']; 

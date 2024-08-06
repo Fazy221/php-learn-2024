@@ -9,7 +9,7 @@
         <form action="/auth/login" method="POST">
           <div class="mb-4">
             <input
-              type="text"
+              type="email"
               name="email"
               placeholder="Email Address"
               class="w-full px-4 py-2 border rounded focus:outline-none"
