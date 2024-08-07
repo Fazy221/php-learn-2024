@@ -76,7 +76,7 @@ class ListingController
             }
             $values = implode(', ', $values);
             $query = "INSERT INTO listings ({$fields}) VALUES ({$values})";
-            Session::setFlashMessage('success_message', 'Listing created successfully'); 
+            Session::setFlashMessage('success_message', 'Listing created successfully'); // added case of created successfully here as well
             $this->db->query($query, $newListingData);
             redirect('/listings');
         }
@@ -92,12 +92,18 @@ class ListingController
             ErrorController::notFound('Listing not found!');
             return;
         };
+        // First method (without new Authorization file)
+        // if(Session::get('user')['key']!==$listing->user_id) {
+        //     $_SESSION['error_message'] = 'You are not authorized to delete this listing';
+        //     return redirect('/listings/' . $listing->id);
+        // }
+        // Second method (after importing Authorization namespace)
         if (!Authorization::isOwner($listing->user_id)) {
             Session::setFlashMessage('error_message', 'You are not authorized to delete this listing'); 
             return redirect('/listings/' . $listing->id);
         }
         $this->db->query('DELETE FROM listings WHERE id = :id', $params)->fetch();
-        Session::setFlashMessage('success_message', 'Listing deleted successfully'); 
+        Session::setFlashMessage('success_message', 'Listing deleted successfully'); // also using in case of success, replacing previous
         redirect('/listings');
     }
     public function edit($params)
@@ -130,6 +136,7 @@ class ListingController
             ErrorController::notFound('Listing ain\'t found');
             return;
         }
+        // Adding authorization layer to update similar to delete
         if (!Authorization::isOwner($listing->user_id)) {
             Session::setFlashMessage('error_message', 'You are not authorized to update this listing'); 
             return redirect('/listings/' . $listing->id);
@@ -137,7 +144,7 @@ class ListingController
         $allowedFields = ['title', 'description', 'salary', 'tags', 'company', 'address', 'city', 'state', 'phone', 'email', 'requirements', 'benefits'];
         $updatedValues = [];
         $updatedValues = array_intersect_key($_POST, array_flip($allowedFields));
-        $updatedValues = array_map('sanitize', $updatedValues); 
+        $updatedValues = array_map('sanitize', $updatedValues); // will use sanitize from helper func to sanitize each value of $updatedValues
         $requiredFields = ['title', 'description', 'email', 'city', 'state', 'salary'];
         $errors = [];
         foreach ($requiredFields as $field) {
@@ -161,7 +168,7 @@ class ListingController
             $updatedValues['id'] = $id;
             $this->db->query($updateQuery, $updatedValues);
             
-            Session::setFlashMessage('success_message', 'Listing updated successfully'); 
+            Session::setFlashMessage('success_message', 'Listing updated successfully'); // using in case of update, replacing previous
             redirect('/listings/' . $id);
         }
     }
