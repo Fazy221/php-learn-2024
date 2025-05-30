@@ -24,6 +24,9 @@ array_shift($users);
 // unshift
 array_unshift($ids, 2);
 array_unshift($users, 'user3');
+
+// slice method is similar to DSA's get method on LinkedList but we also have option to return range of values instead of single value. Splice meanwhile is similar to insert method in LinkedList
+
 // slice (return part of arr as new arr instead of manipulating original one)
 $ids2 = array_slice($ids, 2, 3); // it's kinda odd but in 2nd arg, we want to start slicing from 2nd index then in 3rd arg, we say to start slicing given index which is 2 and it'll count as 1st step then move one by one to next. As we gave 3 so it'll move 2 steps further 
 // var_dump($ids2);
